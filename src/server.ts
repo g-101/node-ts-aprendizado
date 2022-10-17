@@ -7,7 +7,7 @@ import apiRoutes from './routes';
 
 dotenv.config();
 const server = express();
-const port = process.env.PORT;
+const port = process.env.API_PORT;
 
 // MIDDLEWARES
 server.use(cors());
@@ -20,4 +20,4 @@ server.use((req: Request, res: Response) => {
   res.status(404).json({ error: '404 - not found' });
 });
 // SERVER LISTENING
-server.listen(3333, () => console.log('server ON: http://localhost:3333'));
+server.listen(port, () => console.log('server ON: http://localhost:3333'));

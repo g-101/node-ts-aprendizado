@@ -1,11 +1,8 @@
 import { Router } from 'express';
+import * as apiController from './controllers/apiController';
+
 const router = Router();
 
-router.get('/ping', (req, res) => {
-  res.status(200).json({ message: 'pong' });
-});
-router.get('/username/:username', (req, res) => {
-  const { username }: { username: string } = req.params;
-  res.status(200).json({ username }); /* o metodo json ja transforma e envia a resposta como json */
-});
+router.get('/ping', apiController.ping);
+router.get('/username/:username', apiController.username);
 export default router;
