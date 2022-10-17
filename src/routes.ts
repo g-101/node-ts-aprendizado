@@ -6,6 +6,6 @@ router.get('/ping', (req, res) => {
 });
 router.get('/username/:username', (req, res) => {
   const { username }: { username: string } = req.params;
-  res.status(200).json({ username });
+  res.status(200).json({ username }); /* o metodo json ja transforma e envia a resposta como json */
 });
 export default router;
