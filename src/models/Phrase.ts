@@ -4,7 +4,7 @@ import { sequelize } from '../instances/ms';
 export interface PhraseModel extends Model {
   id: number;
   author: string;
-  txt: string;
+  text: string;
 }
 
 export const Phrase = sequelize.define<PhraseModel>(
@@ -15,10 +15,10 @@ export const Phrase = sequelize.define<PhraseModel>(
       autoIncrement: true,
       type: DataTypes.INTEGER,
     },
-    auhor: {
+    author: {
       type: DataTypes.STRING,
     },
-    txt: {
+    text: {
       type: DataTypes.STRING,
     },
   },

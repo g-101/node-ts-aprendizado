@@ -20,4 +20,4 @@ server.use((req: Request, res: Response) => {
   res.status(404).json({ error: '404 - not found' });
 });
 // SERVER LISTENING
-server.listen(port, () => console.log('server ON: http://localhost:3333'));
+server.listen(port, () => console.log(`server ON: http://localhost:${port}`));
