@@ -1,22 +1,23 @@
 import { Request, Response } from 'express';
+import { Sequelize } from 'sequelize';
 import { Phrase, PhraseModel } from '../models/Phrase';
 
 export const createPhrase = async (req: Request, res: Response) => {
   const { author, text }: PhraseModel = req.body;
 
   const newPhrase = await Phrase.create({ author, text });
-  res.status(201).json({ msg: newPhrase });
+  res.status(201).json(newPhrase);
 };
 
 export const getPhrases = async (req: Request, res: Response) => {
   const phrases = await Phrase.findAll();
-  res.status(200).json({ phrases });
+  res.json(phrases);
 };
 export const getPhrasesByAuthor = async (req: Request, res: Response) => {
   const { name } = req.query;
 
   const phrasesByAuthor = await Phrase.findAll({ where: { author: name }, attributes: ['text'] });
-  res.status(200).json({ phrasesByAuthor });
+  res.json(phrasesByAuthor);
 };
 
 export const getPhraseById = async (req: Request, res: Response) => {
@@ -26,7 +27,7 @@ export const getPhraseById = async (req: Request, res: Response) => {
   if (!phrase) {
     res.status(404).json({ error: 'frase não encontrada' });
   }
-  res.status(200).json({ phrase });
+  res.json(phrase);
 };
 
 export const updatePhrase = async (req: Request, res: Response) => {
@@ -40,7 +41,7 @@ export const updatePhrase = async (req: Request, res: Response) => {
   phrase!.text = text;
 
   await phrase?.save();
-  res.status(200).json({ msg: 'updated', phrase });
+  res.json(phrase);
 };
 
 export const deletePhrase = async (req: Request, res: Response) => {
@@ -53,4 +54,16 @@ export const deletePhrase = async (req: Request, res: Response) => {
   await Phrase.destroy({ where: { id: id } });
 
   res.json({});
+};
+
+export const getRandomPhrase = async (req: Request, res: Response) => {
+  /* vai pegar apenas UMA frase aleatoria */
+  const phrase = await Phrase.findOne({
+    order: [Sequelize.fn('RAND')],
+  });
+  if (!phrase) {
+    res.status(404).json({ error: 'não há frases cadastradas' });
+  }
+  /* retorna a frase encontrada */
+  res.json(phrase);
 };

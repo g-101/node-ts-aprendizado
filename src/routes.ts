@@ -7,6 +7,7 @@ router.post('/frases', apiController.createPhrase);
 
 router.get('/frases', apiController.getPhrases);
 router.get('/frases/author', apiController.getPhrasesByAuthor);
+router.get('/frases/aleatoria', apiController.getRandomPhrase);
 router.get('/frases/:id', apiController.getPhraseById);
 
 router.put('/frases/:id', apiController.updatePhrase);
